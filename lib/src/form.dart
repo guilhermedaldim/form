@@ -2,6 +2,7 @@ library form;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'validator.dart';
 
@@ -125,6 +126,7 @@ class Input extends StatefulWidget {
     this.cursorWidth = 2.0,
     this.cursorRadius,
     this.cursorColor,
+    this.inputFormatters,
     this.keyboardAppearance,
     this.scrollPadding = const EdgeInsets.all(20.0),
     this.enableInteractiveSelection = true,
@@ -142,6 +144,8 @@ class Input extends StatefulWidget {
   final bool autovalidate;
 
   final List<Validator> validators;
+
+  final List<TextInputFormatter> inputFormatters;
 
   final TextEditingController controller;
 
@@ -292,6 +296,7 @@ class _InputState extends State<Input> {
       decoration: widget.decoration,
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
+      inputFormatters: widget.inputFormatters,
       style: widget.style,
       strutStyle: widget.strutStyle,
       textAlign: widget.textAlign,
@@ -363,6 +368,7 @@ class _InputBase extends StatefulWidget {
     this.smartDashesType,
     this.smartQuotesType,
     this.enableSuggestions,
+    this.inputFormatters,
     this.maxLines,
     this.minLines,
     this.expands,
@@ -404,6 +410,8 @@ class _InputBase extends StatefulWidget {
   final TextInputType keyboardType;
 
   final TextInputAction textInputAction;
+
+  final List<TextInputFormatter> inputFormatters;
 
   final TextCapitalization textCapitalization;
 
@@ -520,8 +528,7 @@ class _InputBaseState extends State<_InputBase> {
     // mensagem de erro
     // TODO: verificar a atualização quando alterar os validators dos models
     if (_errorText != null &&
-        (!listEquals(oldWidget.validators, widget.validators) ||
-            !listEquals(oldWidget.model.validators, widget.model.validators))) {
+        (!listEquals(oldWidget.validators, widget.validators))) {
       validate();
     }
 
@@ -546,7 +553,7 @@ class _InputBaseState extends State<_InputBase> {
 
     removeListener(_changeValue);
 
-    _controller.dispose();
+    // _controller.dispose();
     super.dispose();
   }
 
@@ -556,7 +563,6 @@ class _InputBaseState extends State<_InputBase> {
       controller: _controller,
       focusNode: widget.focusNode,
       decoration: widget.decoration.copyWith(
-        labelText: widget?.model?.label ?? '',
         errorText: _errorText,
       ),
       keyboardType: widget.keyboardType,
@@ -567,6 +573,7 @@ class _InputBaseState extends State<_InputBase> {
       textAlignVertical: widget.textAlignVertical,
       textDirection: widget.textDirection,
       textCapitalization: widget.textCapitalization,
+      inputFormatters: widget.inputFormatters,
       autofocus: widget.autofocus,
       toolbarOptions: widget.toolbarOptions,
       readOnly: widget.readOnly,
