@@ -9,11 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  validators: ^2.0.0+1
+  validators: ^3.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  effective_dart: ^1.2.4
 
 flutter:
