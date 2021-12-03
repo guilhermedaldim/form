@@ -33,11 +33,11 @@ class ValidateFormPage extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: RaisedButton(
+                      child: ElevatedButton(
                         child: Text("Enter"),
                         onPressed: () {
                           if (FormInput.get("auth").validate()) {
-                            scaffoldKey.currentState.showSnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
                                   "Welcome, ${Input.get("email").text}!",

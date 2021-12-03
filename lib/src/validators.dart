@@ -28,8 +28,7 @@ mixin Validators {
   static Validator isBefore(dynamic date) => BeforeValidator(date);
 
   /// Check if the string is a date that's before the specified date
-  static Validator byteLength(int min, [int max]) =>
-      ByteLengthValidator(min, max);
+  static Validator byteLength(int min, [int? max]) => ByteLengthValidator(min, max!);
 
   /// Check if the string is a credit card
   static Validator get creditCard => CreditCardValidator();
@@ -75,18 +74,16 @@ mixin Validators {
   static Validator get isInt => IntValidator();
 
   /// Check if the string is IP version 4 or 6
-  static Validator ip([/* <String | int> */ dynamic version]) =>
-      IPValidator(version);
+  static Validator ip([/* <String | int> */ dynamic version]) => IPValidator(version);
 
   /// Check if the string is an ISBN (version 10 or 13)
-  static Validator isbn([/* <String | int> */ dynamic version]) =>
-      ISBNValidator(version);
+  static Validator isbn([/* <String | int> */ dynamic version]) => ISBNValidator(version);
 
   /// Check if the string is valid JSON
   static Validator get json => JsonValidator();
 
   /// Check if the length of the string str falls in a range
-  static Validator length(int min, [int max]) => LengthValidator(min, max);
+  static Validator length(int min, [int? max]) => LengthValidator(min, max!);
 
   /// Check if the input has some value
   static Validator get required => RequiredValidator();
@@ -135,8 +132,7 @@ mixin Validators {
       );
 
   /// Check if the string is a UUID (version 3, 4 or 5)
-  static Validator uuid([/* <String | int> */ dynamic version]) =>
-      UUIDValidator(version);
+  static Validator uuid([/* <String | int> */ dynamic version]) => UUIDValidator(version);
 
   /// Check if the string contains a mixture of full and half-width chars
   static Validator get variableWidth => VariableWidthValidator();

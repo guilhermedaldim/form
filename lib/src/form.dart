@@ -9,12 +9,11 @@ import 'validator.dart';
 class FormInput extends StatefulWidget {
   const FormInput(
     this.tag, {
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
   }) : super(key: key);
 
-  static _FormInputBaseState get(dynamic tag) =>
-      _FormInputState.get(tag).currentState;
+  static _FormInputBaseState? get(dynamic tag) => _FormInputState.get(tag)?.currentState;
 
   final dynamic tag;
 
@@ -27,13 +26,13 @@ class FormInput extends StatefulWidget {
 class _FormInputState extends State<FormInput> {
   static final _forms = <dynamic, GlobalKey<_FormInputBaseState>>{};
 
-  static GlobalKey<_FormInputBaseState> get(dynamic tag) {
+  static GlobalKey<_FormInputBaseState>? get(dynamic tag) {
     return _forms[tag];
   }
 
   final key = GlobalKey<_FormInputBaseState>();
 
-  FormModel get model => widget.tag is FormModel ? widget.tag : null;
+  FormModel? get model => widget.tag is FormModel ? widget.tag : null;
 
   @override
   void initState() {
@@ -56,9 +55,9 @@ class _FormInputState extends State<FormInput> {
 }
 
 class FormInputBase extends StatefulWidget {
-  const FormInputBase({Key key, this.child}) : super(key: key);
+  const FormInputBase({Key? key, this.child}) : super(key: key);
 
-  final Widget child;
+  final Widget? child;
 
   @override
   _FormInputBaseState createState() => _FormInputBaseState();
@@ -69,17 +68,17 @@ class _FormInputBaseState extends State<FormInputBase> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.child;
+    return widget.child!;
   }
 
-  _InputBaseState input(dynamic tag) {
-    return _inputs[tag].currentState;
+  _InputBaseState? input(dynamic tag) {
+    return _inputs[tag]?.currentState;
   }
 
   bool validate() {
     var hasError = false;
     for (final input in _inputs.values) {
-      if (!input.currentState.validate()) {
+      if (!input.currentState!.validate()) {
         hasError = true;
       }
     }
@@ -90,7 +89,7 @@ class _FormInputBaseState extends State<FormInputBase> {
 class Input extends StatefulWidget {
   const Input(
     this.tag, {
-    Key key,
+    Key? key,
     this.autovalidate = false,
     this.validators = const <Validator>[],
     this.controller,
@@ -118,7 +117,7 @@ class Input extends StatefulWidget {
     this.minLines,
     this.expands = false,
     this.maxLength,
-    this.maxLengthEnforced = true,
+    this.maxLengthEnforcement,
     this.onChanged,
     this.onEditingComplete,
     this.onSubmitted,
@@ -137,7 +136,7 @@ class Input extends StatefulWidget {
     this.autofillHints,
   }) : super(key: key);
 
-  static _InputBaseState get(dynamic tag) => _InputState.get(tag).currentState;
+  static _InputBaseState? get(dynamic tag) => _InputState.get(tag)?.currentState;
 
   final dynamic tag;
 
@@ -145,31 +144,31 @@ class Input extends StatefulWidget {
 
   final List<Validator> validators;
 
-  final List<TextInputFormatter> inputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
-  final String initialValue;
+  final String? initialValue;
 
-  final FocusNode focusNode;
+  final FocusNode? focusNode;
 
   final InputDecoration decoration;
 
-  final TextInputType keyboardType;
+  final TextInputType? keyboardType;
 
-  final TextInputAction textInputAction;
+  final TextInputAction? textInputAction;
 
   final TextCapitalization textCapitalization;
 
-  final TextStyle style;
+  final TextStyle? style;
 
-  final StrutStyle strutStyle;
+  final StrutStyle? strutStyle;
 
   final TextAlign textAlign;
 
-  final TextAlignVertical textAlignVertical;
+  final TextAlignVertical? textAlignVertical;
 
-  final TextDirection textDirection;
+  final TextDirection? textDirection;
 
   final bool autofocus;
 
@@ -177,45 +176,45 @@ class Input extends StatefulWidget {
 
   final bool autocorrect;
 
-  final SmartDashesType smartDashesType;
+  final SmartDashesType? smartDashesType;
 
-  final SmartQuotesType smartQuotesType;
+  final SmartQuotesType? smartQuotesType;
 
   final bool enableSuggestions;
 
   final int maxLines;
 
-  final int minLines;
+  final int? minLines;
 
   final bool expands;
 
   final bool readOnly;
 
-  final ToolbarOptions toolbarOptions;
+  final ToolbarOptions? toolbarOptions;
 
-  final bool showCursor;
+  final bool? showCursor;
 
   static const int noMaxLength = -1;
 
-  final int maxLength;
+  final int? maxLength;
 
-  final bool maxLengthEnforced;
+  final MaxLengthEnforcement? maxLengthEnforcement;
 
-  final ValueChanged<String> onChanged;
+  final ValueChanged<String>? onChanged;
 
-  final VoidCallback onEditingComplete;
+  final VoidCallback? onEditingComplete;
 
-  final ValueChanged<String> onSubmitted;
+  final ValueChanged<String>? onSubmitted;
 
-  final bool enabled;
+  final bool? enabled;
 
   final double cursorWidth;
 
-  final Radius cursorRadius;
+  final Radius? cursorRadius;
 
-  final Color cursorColor;
+  final Color? cursorColor;
 
-  final Brightness keyboardAppearance;
+  final Brightness? keyboardAppearance;
 
   final EdgeInsets scrollPadding;
 
@@ -223,15 +222,15 @@ class Input extends StatefulWidget {
 
   bool get selectionEnabled => enableInteractiveSelection;
 
-  final GestureTapCallback onTap;
+  final GestureTapCallback? onTap;
 
-  final InputCounterWidgetBuilder buildCounter;
+  final InputCounterWidgetBuilder? buildCounter;
 
-  final ScrollPhysics scrollPhysics;
+  final ScrollPhysics? scrollPhysics;
 
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
 
-  final Iterable<String> autofillHints;
+  final Iterable<String>? autofillHints;
 
   @override
   _InputState createState() => _InputState();
@@ -240,7 +239,7 @@ class Input extends StatefulWidget {
 class _InputState extends State<Input> {
   static final _inputs = <dynamic, GlobalKey<_InputBaseState>>{};
 
-  static GlobalKey<_InputBaseState> get(dynamic tag) {
+  static GlobalKey<_InputBaseState>? get(dynamic tag) {
     if (_inputs.containsKey(tag.hashCode)) {
       return _inputs[tag.hashCode];
     }
@@ -254,7 +253,7 @@ class _InputState extends State<Input> {
 
   final key = GlobalKey<_InputBaseState>();
 
-  InputNotifier get model => widget.tag is InputNotifier ? widget.tag : null;
+  InputNotifier? get model => widget.tag is InputNotifier ? widget.tag : null;
 
   @override
   void initState() {
@@ -268,7 +267,7 @@ class _InputState extends State<Input> {
     }
 
     if (form != null) {
-      form?._inputs[widget.tag ?? key.hashCode] = key;
+      form._inputs[widget.tag ?? key.hashCode] = key;
     }
   }
 
@@ -278,9 +277,7 @@ class _InputState extends State<Input> {
     assert(debugCheckHasDirectionality(context));
 
     assert(
-      !(widget.style != null &&
-          widget.style.inherit == false &&
-          (widget.style.fontSize == null || widget.style.textBaseline == null)),
+      !(widget.style != null && widget.style!.inherit == false && (widget.style!.fontSize == null || widget.style!.textBaseline == null)),
       'inherit false style must supply fontSize and textBaseline',
     );
 
@@ -309,16 +306,10 @@ class _InputState extends State<Input> {
       showCursor: widget.showCursor,
       obscureText: widget.obscureText,
       autocorrect: widget.autocorrect,
-      smartDashesType: widget.smartDashesType ??
-          (widget.obscureText
-              ? SmartDashesType.disabled
-              : SmartDashesType.enabled),
-      smartQuotesType: widget.smartQuotesType ??
-          (widget.obscureText
-              ? SmartQuotesType.disabled
-              : SmartQuotesType.enabled),
+      smartDashesType: widget.smartDashesType ?? (widget.obscureText ? SmartDashesType.disabled : SmartDashesType.enabled),
+      smartQuotesType: widget.smartQuotesType ?? (widget.obscureText ? SmartQuotesType.disabled : SmartQuotesType.enabled),
       enableSuggestions: widget.enableSuggestions,
-      maxLengthEnforced: widget.maxLengthEnforced,
+      maxLengthEnforcement: widget.maxLengthEnforcement,
       maxLines: widget.maxLines,
       minLines: widget.minLines,
       expands: widget.expands,
@@ -343,7 +334,7 @@ class _InputState extends State<Input> {
 class _InputBase extends StatefulWidget {
   const _InputBase(
     this.tag, {
-    Key key,
+    Key? key,
     this.model,
     this.autovalidate,
     this.validators,
@@ -373,7 +364,7 @@ class _InputBase extends StatefulWidget {
     this.minLines,
     this.expands,
     this.maxLength,
-    this.maxLengthEnforced,
+    this.maxLengthEnforcement,
     this.onChanged,
     this.onEditingComplete,
     this.onSubmitted,
@@ -393,114 +384,114 @@ class _InputBase extends StatefulWidget {
 
   final dynamic tag;
 
-  final InputNotifier model;
+  final InputNotifier? model;
 
-  final bool autovalidate;
+  final bool? autovalidate;
 
-  final List<Validator> validators;
+  final List<Validator>? validators;
 
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
-  final String initialValue;
+  final String? initialValue;
 
-  final FocusNode focusNode;
+  final FocusNode? focusNode;
 
-  final InputDecoration decoration;
+  final InputDecoration? decoration;
 
-  final TextInputType keyboardType;
+  final TextInputType? keyboardType;
 
-  final TextInputAction textInputAction;
+  final TextInputAction? textInputAction;
 
-  final List<TextInputFormatter> inputFormatters;
+  final List<TextInputFormatter>? inputFormatters;
 
-  final TextCapitalization textCapitalization;
+  final TextCapitalization? textCapitalization;
 
-  final TextStyle style;
+  final TextStyle? style;
 
-  final StrutStyle strutStyle;
+  final StrutStyle? strutStyle;
 
-  final TextAlign textAlign;
+  final TextAlign? textAlign;
 
-  final TextAlignVertical textAlignVertical;
+  final TextAlignVertical? textAlignVertical;
 
-  final TextDirection textDirection;
+  final TextDirection? textDirection;
 
-  final bool autofocus;
+  final bool? autofocus;
 
-  final bool obscureText;
+  final bool? obscureText;
 
-  final bool autocorrect;
+  final bool? autocorrect;
 
-  final SmartDashesType smartDashesType;
+  final SmartDashesType? smartDashesType;
 
-  final SmartQuotesType smartQuotesType;
+  final SmartQuotesType? smartQuotesType;
 
-  final bool enableSuggestions;
+  final bool? enableSuggestions;
 
-  final int maxLines;
+  final int? maxLines;
 
-  final int minLines;
+  final int? minLines;
 
-  final bool expands;
+  final bool? expands;
 
-  final bool readOnly;
+  final bool? readOnly;
 
-  final ToolbarOptions toolbarOptions;
+  final ToolbarOptions? toolbarOptions;
 
-  final bool showCursor;
+  final bool? showCursor;
 
-  final int maxLength;
+  final int? maxLength;
 
-  final bool maxLengthEnforced;
+  final MaxLengthEnforcement? maxLengthEnforcement;
 
-  final ValueChanged<String> onChanged;
+  final ValueChanged<String>? onChanged;
 
-  final VoidCallback onEditingComplete;
+  final VoidCallback? onEditingComplete;
 
-  final ValueChanged<String> onSubmitted;
+  final ValueChanged<String>? onSubmitted;
 
-  final bool enabled;
+  final bool? enabled;
 
-  final double cursorWidth;
+  final double? cursorWidth;
 
-  final Radius cursorRadius;
+  final Radius? cursorRadius;
 
-  final Color cursorColor;
+  final Color? cursorColor;
 
-  final Brightness keyboardAppearance;
+  final Brightness? keyboardAppearance;
 
-  final EdgeInsets scrollPadding;
+  final EdgeInsets? scrollPadding;
 
-  final bool enableInteractiveSelection;
+  final bool? enableInteractiveSelection;
 
-  bool get selectionEnabled => enableInteractiveSelection;
+  bool? get selectionEnabled => enableInteractiveSelection;
 
-  final GestureTapCallback onTap;
+  final GestureTapCallback? onTap;
 
-  final InputCounterWidgetBuilder buildCounter;
+  final InputCounterWidgetBuilder? buildCounter;
 
-  final ScrollPhysics scrollPhysics;
+  final ScrollPhysics? scrollPhysics;
 
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
 
-  final Iterable<String> autofillHints;
+  final Iterable<String>? autofillHints;
 
   @override
   _InputBaseState createState() => _InputBaseState();
 }
 
 class _InputBaseState extends State<_InputBase> {
-  TextEditingController _controller;
+  TextEditingController? _controller;
 
-  TextEditingController get controller => _controller;
+  TextEditingController? get controller => _controller;
 
-  TextEditingValue get value => _controller.value;
+  TextEditingValue? get value => _controller?.value;
 
-  String _errorText;
+  String? _errorText;
 
-  String get text => _controller.text;
+  String? get text => _controller?.text;
 
-  String get errorText => _errorText;
+  String? get errorText => _errorText;
 
   final textNotifier = ValueNotifier<String>("");
 
@@ -527,15 +518,14 @@ class _InputBaseState extends State<_InputBase> {
     // Revalidar input se os validators forem alterados e já exitir alguma
     // mensagem de erro
     // TODO: verificar a atualização quando alterar os validators dos models
-    if (_errorText != null &&
-        (!listEquals(oldWidget.validators, widget.validators))) {
+    if (_errorText != null && (!listEquals(oldWidget.validators, widget.validators))) {
       validate();
     }
 
     // autovalidate
     if (oldWidget.autovalidate != widget.autovalidate) {
-      if (widget.autovalidate) {
-        if (_errorText != null || text.isNotEmpty) {
+      if (widget.autovalidate!) {
+        if (_errorText != null || text!.isNotEmpty) {
           validate();
         }
         addListener(validate);
@@ -562,50 +552,44 @@ class _InputBaseState extends State<_InputBase> {
     return TextField(
       controller: _controller,
       focusNode: widget.focusNode,
-      decoration: widget.decoration.copyWith(
+      decoration: widget.decoration?.copyWith(
         errorText: _errorText,
       ),
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
       style: widget.style,
       strutStyle: widget.strutStyle,
-      textAlign: widget.textAlign,
+      textAlign: widget.textAlign!,
       textAlignVertical: widget.textAlignVertical,
       textDirection: widget.textDirection,
-      textCapitalization: widget.textCapitalization,
+      textCapitalization: widget.textCapitalization!,
       inputFormatters: widget.inputFormatters,
-      autofocus: widget.autofocus,
+      autofocus: widget.autofocus!,
       toolbarOptions: widget.toolbarOptions,
-      readOnly: widget.readOnly,
+      readOnly: widget.readOnly!,
       showCursor: widget.showCursor,
-      obscureText: widget.obscureText,
-      autocorrect: widget.autocorrect,
-      smartDashesType: widget.smartDashesType ??
-          (widget.obscureText
-              ? SmartDashesType.disabled
-              : SmartDashesType.enabled),
-      smartQuotesType: widget.smartQuotesType ??
-          (widget.obscureText
-              ? SmartQuotesType.disabled
-              : SmartQuotesType.enabled),
-      enableSuggestions: widget.enableSuggestions,
-      maxLengthEnforced: widget.maxLengthEnforced,
+      obscureText: widget.obscureText!,
+      autocorrect: widget.autocorrect!,
+      smartDashesType: widget.smartDashesType ?? (widget.obscureText! ? SmartDashesType.disabled : SmartDashesType.enabled),
+      smartQuotesType: widget.smartQuotesType ?? (widget.obscureText! ? SmartQuotesType.disabled : SmartQuotesType.enabled),
+      enableSuggestions: widget.enableSuggestions!,
+      maxLengthEnforcement: widget.maxLengthEnforcement,
       maxLines: widget.maxLines,
       minLines: widget.minLines,
-      expands: widget.expands,
+      expands: widget.expands!,
       maxLength: widget.maxLength,
       onChanged: widget.onChanged,
       onTap: widget.onTap,
       onEditingComplete: widget.onEditingComplete,
       onSubmitted: widget.onSubmitted,
-      enabled: widget.enabled ?? widget.decoration.enabled,
-      cursorWidth: widget.cursorWidth,
+      enabled: widget.enabled ?? widget.decoration?.enabled,
+      cursorWidth: widget.cursorWidth!,
       cursorRadius: widget.cursorRadius,
       cursorColor: widget.cursorColor,
-      scrollPadding: widget.scrollPadding,
+      scrollPadding: widget.scrollPadding!,
       scrollPhysics: widget.scrollPhysics,
       keyboardAppearance: widget.keyboardAppearance,
-      enableInteractiveSelection: widget.enableInteractiveSelection,
+      enableInteractiveSelection: widget.enableInteractiveSelection!,
       buildCounter: widget.buildCounter,
     );
   }
@@ -640,38 +624,38 @@ class _InputBaseState extends State<_InputBase> {
 
   void _setController() {
     _controller = widget.controller ?? TextEditingController();
-    _controller.addListener(_changeValue);
-    if (text != null && text.isNotEmpty) {
-      _controller.value = TextEditingValue(text: text);
+    _controller?.addListener(_changeValue);
+    if (text != null && text!.isNotEmpty) {
+      _controller?.value = TextEditingValue(text: text!);
     } else {
       _setInitialValue();
     }
-    if (widget.autovalidate) addListener(validate);
+    if (widget.autovalidate!) addListener(validate);
   }
 
   void _setInitialValue() {
     if (widget.initialValue != null) {
-      _controller.value = TextEditingValue(text: widget.initialValue);
+      _controller?.value = TextEditingValue(text: widget.initialValue!);
     } else {
-      _controller.value = TextEditingValue.empty;
+      _controller?.value = TextEditingValue.empty;
     }
   }
 
   /// Permitir que atualizações no input sejam detectadas com o [ValueNotifier]
   void _changeValue() {
-    textNotifier.value = text;
+    textNotifier.value = text!;
     widget.model?.value = text;
   }
 
   /// Equivalente a [TextEditingController.addListener]
-  void addListener(VoidCallback listener) {
+  void addListener(VoidCallback? listener) {
     assert(listener != null);
-    _controller.addListener(listener);
+    _controller?.addListener(listener!);
   }
 
   /// Equivalente a [TextEditingController.removeListener]
-  void removeListener(VoidCallback listener) {
-    _controller.removeListener(listener);
+  void removeListener(VoidCallback? listener) {
+    _controller?.removeListener(listener!);
   }
 }
 
@@ -681,17 +665,17 @@ class InputText extends StatelessWidget {
 
   const InputText(
     this.tag, {
-    Key key,
+    Key? key,
     this.defaultValue = "",
   })  : assert(tag != null),
         super(key: key);
 
-  _InputBaseState get input => Input.get(tag);
+  _InputBaseState? get input => Input.get(tag);
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<String>(
-      valueListenable: input.textNotifier,
+      valueListenable: input!.textNotifier,
       builder: (context, value, child) => Text(
         value.isEmpty ? defaultValue : value,
       ),
@@ -700,9 +684,9 @@ class InputText extends StatelessWidget {
 }
 
 class FormModel {
-  _FormInputBaseState get state => FormInput.get(hashCode);
+  _FormInputBaseState? get state => FormInput.get(hashCode);
 
-  bool validate() => state.validate();
+  bool validate() => state!.validate();
 }
 
 class InputNotifier<T> extends ValueNotifier<T> {
@@ -712,14 +696,14 @@ class InputNotifier<T> extends ValueNotifier<T> {
 
   final List<Validator> validators;
 
-  _InputBaseState get state => Input.get(hashCode);
+  _InputBaseState get state => Input.get(hashCode)!;
 
   bool validate() => state.validate();
 
   @Deprecated('Use validate method instaed')
   bool get isValid => state.isValid;
 
-  String get errorText => state.errorText;
+  String? get errorText => state.errorText;
 
   @override
   String toString() => value.toString();
@@ -727,14 +711,14 @@ class InputNotifier<T> extends ValueNotifier<T> {
 
 extension StringNotifier on String {
   InputNotifier<String> get input {
-    return InputNotifier<String>("", this, null);
+    return InputNotifier<String>("", this, []);
   }
 }
 
 InputNotifier<String> input({
   String label = "",
   dynamic initialData = "",
-  List<Validator> validators,
+  List<Validator>? validators,
 }) {
-  return InputNotifier<String>(label, initialData, validators);
+  return InputNotifier<String>(label, initialData, validators!);
 }
