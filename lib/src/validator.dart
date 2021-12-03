@@ -5,11 +5,11 @@ import 'package:validators/validators.dart' as validator;
 abstract class Validator {
   bool validate(String str);
 
-  String _customErrorText;
+  String? _customErrorText;
 
   String get errorText;
 
-  String get customErrorText => _customErrorText;
+  String? get customErrorText => _customErrorText;
 
   set errorText(String msg) => _customErrorText = msg;
 }
@@ -50,8 +50,7 @@ class AfterValidator extends Validator {
   bool validate(String str) => validator.isAfter(str, date);
 
   @override
-  String get errorText =>
-      "Input should be a date that's after that ${date.toString()}";
+  String get errorText => "Input should be a date that's after that ${date.toString()}";
 }
 
 /// Check if the string contains only letters (a-zA-Z)
@@ -100,15 +99,16 @@ class BeforeValidator extends Validator {
   bool validate(String str) => validator.isBefore(str, date);
 
   @override
-  String get errorText =>
-      "Input should be a date that's before that ${date.toString()}";
+  String get errorText => "Input should be a date that's before that ${date.toString()}";
 }
 
 /// Check if the string's length (in bytes) falls in a range.
 class ByteLengthValidator extends Validator {
   ByteLengthValidator(this.min, [this.max]);
 
-  final int min, max;
+  final int min;
+
+  final int? max;
 
   @override
   bool validate(String str) => validator.isByteLength(str, min, max);
@@ -145,8 +145,7 @@ class DivisibleByValidator extends Validator {
   bool validate(String str) => validator.isDivisibleBy(str, n);
 
   @override
-  String get errorText =>
-      "Input should be a number that's divisible by another";
+  String get errorText => "Input should be a number that's divisible by another";
 }
 
 /// Check if the string is an email
@@ -184,8 +183,7 @@ class FQNDValidator extends Validator {
       );
 
   @override
-  String get errorText =>
-      "Input shoud contains a fully qualified domain name (e.g. domain.com)";
+  String get errorText => "Input shoud contains a fully qualified domain name (e.g. domain.com)";
 }
 
 /// Check if the string contains any full-width chars
@@ -231,7 +229,7 @@ class InValidator extends Validator {
   final List<dynamic> values;
 
   @override
-  bool validate(String str) => validator.isIn(str, values);
+  bool validate(String str) => validator.isIn(str, values)!;
 
   @override
   String get errorText => "Input shound contains in a array of allowed values";
@@ -269,8 +267,7 @@ class ISBNValidator extends Validator {
   bool validate(String str) => validator.isISBN(str, version);
 
   @override
-  String get errorText =>
-      "Input should contains a valid ISBN (version 10 or 13)";
+  String get errorText => "Input should contains a valid ISBN (version 10 or 13)";
 }
 
 /// Check if the string is valid JSON
@@ -286,7 +283,9 @@ class JsonValidator extends Validator {
 class LengthValidator extends Validator {
   LengthValidator(this.min, [this.max]);
 
-  final int min, max;
+  final int min;
+
+  final int? max;
 
   @override
   bool validate(String str) => validator.isLength(str, min, max);
@@ -390,8 +389,7 @@ class UUIDValidator extends Validator {
   bool validate(String str) => validator.isUUID(str, version);
 
   @override
-  String get errorText =>
-      "Input should contains a valid UUID (version 3, 4 or 5)";
+  String get errorText => "Input should contains a valid UUID (version 3, 4 or 5)";
 }
 
 /// Check if the string contains a mixture of full and half-width chars
@@ -400,8 +398,7 @@ class VariableWidthValidator extends Validator {
   bool validate(String str) => validator.isVariableWidth(str);
 
   @override
-  String get errorText =>
-      "Input should contains a mixture of full and half-width chars";
+  String get errorText => "Input should contains a mixture of full and half-width chars";
 }
 
 /// Check if string matches the pattern
@@ -427,8 +424,7 @@ class MinLengthValidator extends Validator {
   bool validate(String str) => str.length >= min;
 
   @override
-  String get errorText =>
-      "Please lengthen this text to $min characters or more";
+  String get errorText => "Please lengthen this text to $min characters or more";
 }
 
 /// Check if the length of the input value is more than or equal to [max]

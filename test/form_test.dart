@@ -9,13 +9,13 @@ void main() {
       validators: [Validators.required],
     )));
 
-    expect(false, Input.get('name').validate());
+    expect(false, Input.get('name')?.validate());
 
     await tester.enterText(find.byType(Input), " ");
-    expect(false, Input.get('name').validate());
+    expect(false, Input.get('name')?.validate());
 
     await tester.enterText(find.byType(Input), "some name");
-    expect(true, Input.get('name').validate());
+    expect(true, Input.get('name')?.validate());
   });
 
   testWidgets("errorText", (var tester) async {
@@ -24,11 +24,11 @@ void main() {
       validators: [Validators.required],
     )));
 
-    expect(null, Input.get("name").errorText);
+    expect(null, Input.get("name")?.errorText);
 
-    Input.get("name").validate();
+    Input.get("name")?.validate();
 
-    expect(Validators.required.errorText, Input.get("name").errorText);
+    expect(Validators.required.errorText, Input.get("name")?.errorText);
   });
 
   testWidgets('controller', (var tester) async {
@@ -39,8 +39,8 @@ void main() {
       controller: controller,
     )));
 
-    expect(controller, Input.get('name').controller);
-    expect('initial value', Input.get('name').text);
+    expect(controller, Input.get('name')?.controller);
+    expect('initial value', Input.get('name')?.text);
   });
 
   testWidgets('initialValue', (var tester) async {
@@ -49,14 +49,14 @@ void main() {
       initialValue: 'initial value',
     )));
 
-    expect('initial value', Input.get('name').text);
+    expect('initial value', Input.get('name')?.text);
   });
 }
 
 class Base extends StatelessWidget {
   final Widget child;
 
-  const Base(this.child, {Key key}) : super(key: key);
+  const Base(this.child, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

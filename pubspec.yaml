@@ -1,10 +1,10 @@
 name: form
 description: Uma forma simples e poderosa para manipulação de formulários em flutter.
-version: 0.0.5
+version: 0.1.0
 homepage: https://github.com/EdsonOnildoJR/form
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -14,5 +14,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  test: ^1.17.10
 
 flutter:

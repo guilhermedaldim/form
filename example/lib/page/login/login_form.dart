@@ -27,7 +27,7 @@ class LoginForm extends StatelessWidget {
             obscureText: true,
           ),
           SizedBox(height: 20),
-          RaisedButton(
+          ElevatedButton(
             onPressed: authController.login,
             child: Text("Login"),
           ),

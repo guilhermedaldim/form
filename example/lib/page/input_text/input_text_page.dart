@@ -26,10 +26,10 @@ class InputTextPage extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: RaisedButton(
+                    child: ElevatedButton(
                       child: Text("Enter"),
                       onPressed: () {
-                        scaffoldKey.currentState.showSnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
                               Input.get("name").text,
